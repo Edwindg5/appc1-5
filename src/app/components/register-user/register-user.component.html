@@ -1,0 +1,67 @@
+<app-header></app-header>
+<div class="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+    <div class="grid grid-cols-3 gap-6 max-w-6xl w-full">
+      
+      <!-- Imagen Izquierda -->
+      <div class="hidden md:flex items-center justify-start">
+        <img src="assets/register-left.jpg" alt="Imagen izquierda" class="h-[550px] object-cover rounded-lg shadow-lg">
+      </div>
+  
+      <!-- Formulario -->
+      <div class="bg-white shadow-xl rounded-lg p-8 col-span-3 md:col-span-1">
+        <h2 class="text-3xl font-semibold text-center text-blue-600 mb-6">Registrar Usuario</h2>
+        <form (ngSubmit)="register()" class="space-y-4">
+          
+          <div>
+            <label class="block text-gray-600 font-medium">Nombre</label>
+            <input
+              type="text"
+              placeholder="Ingrese su nombre"
+              [(ngModel)]="user.name"
+              name="name"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+  
+          <div>
+            <label class="block text-gray-600 font-medium">Correo Electrónico</label>
+            <input
+              type="email"
+              placeholder="Ingrese su correo"
+              [(ngModel)]="user.email"
+              name="email"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+  
+          <div>
+            <label class="block text-gray-600 font-medium">Contraseña</label>
+            <input
+              type="password"
+              placeholder="Ingrese su contraseña"
+              [(ngModel)]="user.password"
+              name="password"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+  
+          <button
+            type="submit"
+            class="w-full bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-300"
+          >
+            Registrar
+          </button>
+  
+        </form>
+      </div>
+  
+      <!-- Imagen Derecha -->
+      <div class="hidden md:flex items-center justify-end">
+        <img src="assets/register-right.jpg" alt="Imagen derecha" class="h-[550px] object-cover rounded-lg shadow-lg">
+      </div>
+  
+    </div>
+</div>

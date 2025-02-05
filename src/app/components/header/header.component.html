@@ -1,0 +1,23 @@
+<header class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md">
+  <h1 class="text-2xl font-bold">Bienvenido Administrador</h1>
+  <div class="flex gap-4">
+    <button
+      class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200 transition"
+      [routerLink]="['/create-product']"
+    >
+      Agregar Producto
+    </button>
+    <button
+      class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200 transition"
+      [routerLink]="['/register-user']"
+    >
+      Registrar Usuario
+    </button>
+    <button
+      class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200 transition"
+      [routerLink]="['/home']"
+    >
+      View Products
+    </button>
+  </div>
+</header>
