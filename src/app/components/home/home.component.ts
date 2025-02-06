@@ -166,7 +166,7 @@ export class HomeComponent implements OnInit {
     this.productService.deleteProduct(productId).subscribe({
       next: () => {
         Swal.fire({
-          title: '¡Eliminado!',
+          title: '¡Ha sido Eliminado!',
           text: 'El producto ha sido eliminado correctamente',
           icon: 'success',
           background: '#1e293b',
