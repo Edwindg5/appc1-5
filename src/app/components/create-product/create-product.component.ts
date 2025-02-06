@@ -19,26 +19,75 @@ export class CreateProductComponent {
 
   addProduct() {
     if (!this.newProduct.name || !this.newProduct.description || this.newProduct.price <= 0) {
-      Swal.fire('Error', 'Todos los campos son obligatorios', 'error');
+      Swal.fire({
+        icon: 'error',
+        title: '¡Oops!',
+        html: '<b>Todos los campos son obligatorios</b>',
+        confirmButtonColor: '#ff4d4d',
+        background: '#222',
+        color: '#fff',
+        showClass: {
+          popup: 'animate__animated animate__shakeX' // Efecto de temblor
+        }
+      });
       return;
     }
 
-    this.productService.createProduct(this.newProduct).subscribe({
-      next: () => {
-        Swal.fire({
-          title: '¡Producto agregado!',
-          text: 'El producto se ha agregado correctamente',
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }).then(() => {
-          // Limpiar el formulario después de cerrar la alerta
-          this.newProduct = { name: '', description: '', price: 0 };
-        });
-      },
-      error: (error) => {
-        Swal.fire('Error', 'No se pudo agregar el producto', 'error');
-        console.error('Error al agregar producto', error);
+    // Alerta de carga con animación circular
+    Swal.fire({
+      title: 'Registrando producto...',
+      html: `
+        <div class="swal2-loading-animation"></div>
+        <p>Espera un momento...</p>
+      `,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showConfirmButton: false,
+      background: '#222',
+      color: '#fff',
+      didOpen: () => {
+        Swal.showLoading();
       }
     });
+
+    setTimeout(() => {
+      this.productService.createProduct(this.newProduct).subscribe({
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Producto agregado!',
+            html: '<b>El producto ha sido registrado exitosamente.</b>',
+            showConfirmButton: false,
+            timer: 2000,
+            background: '#1e293b',
+            color: '#fff',
+            backdrop: `
+              rgba(0,0,0,0.8)
+              url("https://i.gifer.com/7efs.gif")  // Fondo animado
+              center/cover no-repeat
+            `,
+            showClass: {
+              popup: 'animate__animated animate__bounceIn' // Efecto rebote
+            }
+          });
+
+          this.newProduct = { name: '', description: '', price: 0 }; // Limpiar formulario
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            html: '<b>No se pudo agregar el producto.</b>',
+            confirmButtonColor: '#ff4d4d',
+            background: '#222',
+            color: '#fff',
+            showClass: {
+              popup: 'animate__animated animate__shakeX' // Efecto de temblor
+            }
+          });
+          console.error('Error al agregar producto', error);
+        }
+      });
+    }, 3000); // Simulación de espera de 3 segundos antes de llamar a la API
   }
 }
