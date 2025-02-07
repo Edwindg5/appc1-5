@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
   username = '';
   password = '';
-  isLoading = false; // Nueva variable de estado
+  isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 

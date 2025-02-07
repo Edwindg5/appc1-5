@@ -85,6 +85,6 @@ export class RegisterUserComponent {
           console.error('Error al registrar usuario', error);
         }
       });
-    }, 3000); // Simulación de espera de 3 segundos antes de llamar a la API
+    }, 3000); 
   }
 }

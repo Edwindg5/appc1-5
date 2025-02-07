@@ -1,36 +1,44 @@
 <footer class="bg-gray-900 text-white py-6 mt-10">
-    <div class="container mx-auto px-6 text-center md:text-left">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Sección 1 -->
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Sobre nosotros</h3>
-          <p class="text-gray-400 text-sm">
-            Nuestra plataforma facilita la compra, venta e intercambio de productos de manera segura y rápida.
-          </p>
-        </div>
-        
-        <!-- Sección 2 -->
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Enlaces útiles</h3>
-          <ul class="text-gray-400 text-sm space-y-2">
-            <li><a href="#" class="hover:text-teal-400 transition">Inicio</a></li>
-            <li><a href="#" class="hover:text-teal-400 transition">Categorías</a></li>
-            <li><a href="#" class="hover:text-teal-400 transition">Mi cuenta</a></li>
-            <li><a href="#" class="hover:text-teal-400 transition">Ayuda</a></li>
-          </ul>
-        </div>
-  
-        <!-- Sección 3 -->
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Contacto De Empresa</h3>
-          <p class="text-gray-400 text-sm">Email: contacto.com</p>
-          <p class="text-gray-400 text-sm">Teléfono: +52 123 456 7890</p>
-        </div>
+  <div class="container mx-auto px-6 text-center md:text-left">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Sobre La Empresa</h3>
+        <p class="text-gray-400 text-sm">
+          Nuestra plataforma facilita la compra, venta e intercambio de productos de manera segura y rápida.
+        </p>
       </div>
-      
-      <div class="border-t border-gray-700 mt-6 pt-4 text-sm text-gray-500 text-center">
-        © 2025 Segunda Mano UP. Todos los derechos reservados.
+
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Enlaces útiles</h3>
+        <ul class="text-gray-400 text-sm space-y-2">
+          <li>
+            <a href="#" 
+               class="hover:text-teal-400 transition cursor-pointer"
+               (click)="mostrarOpcionesRecursos()">
+              Mis recursos
+            </a>
+          </li>
+          <li><a href="#" class="hover:text-teal-400 transition">Mi cuenta</a></li>
+          <li>
+            <a href="#" 
+               class="hover:text-teal-400 transition cursor-pointer"
+               (mouseenter)="mostrarAyuda()">
+              Ayuda
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Contacto De Empresa</h3>
+        <p class="text-gray-400 text-sm">Email: contacto.com</p>
+        <p class="text-gray-400 text-sm">Teléfono: +52 123 456 7890</p>
       </div>
     </div>
-  </footer>
-  
+
+    <div class="border-t border-gray-700 mt-6 pt-4 text-sm text-gray-500 text-center">
+      © 2025 Segunda Mano UP. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>

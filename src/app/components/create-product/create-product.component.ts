@@ -67,7 +67,7 @@ export class CreateProductComponent {
               center/cover no-repeat
             `,
             showClass: {
-              popup: 'animate__animated animate__bounceIn' // Efecto rebote
+              popup: 'animate__animated animate__bounceIn' 
             }
           });
 
@@ -88,6 +88,6 @@ export class CreateProductComponent {
           console.error('Error al agregar producto', error);
         }
       });
-    }, 3000); // Simulación de espera de 3 segundos antes de llamar a la API
+    }, 3000); 
   }
 }
