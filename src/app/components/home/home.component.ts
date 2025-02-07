@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.model';
 import { Product } from '../../models/product';
 import { HeaderComponent } from '../header/header.component';
 import Swal from 'sweetalert2';
@@ -14,21 +16,21 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
+  users: User[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private userService: UserService) {}
 
   ngOnInit() {
     this.loadProducts();
+    this.loadUsers();
   }
-
-  loadProducts() {
+//Recurso Productos
+loadProducts() {
     this.productService.getProducts().subscribe({
       next: (data) => (this.products = data),
       error: (error) => console.error('Error al cargar productos', error),
     });
-  }
-
-  mostrarOpciones(product: Product) {
+  } mostrarOpciones(product: Product) {
     Swal.fire({
       title: `Acciones para <span class="text-blue-500">${product.name}</span>`,
       html: '<p class="text-gray-600">Selecciona una opción:</p>',
@@ -194,4 +196,141 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+//Recurso Usuarios
+loadUsers() {
+  this.userService.getUsers().subscribe({
+    next: (data) => (this.users = data),
+    error: (error) => console.error('Error al cargar usuarios', error),
+  });
+}
+
+// Mostrar opciones para editar o eliminar usuario
+mostrarOpcionesUsuario(user: User) {
+  Swal.fire({
+    title: `Opciones para <span class="text-blue-500">${user.name}</span>`,
+    html: '<p class="text-gray-600">Selecciona una opción:</p>',
+    icon: 'info',
+    background: '#1e293b',
+    color: '#fff',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: '<i class="fas fa-edit"></i> Editar',
+    denyButtonText: '<i class="fas fa-trash-alt"></i> Eliminar',
+    cancelButtonText: '<i class="fas fa-times"></i> Cancelar',
+    confirmButtonColor: '#4CAF50',
+    denyButtonColor: '#E53935',
+    cancelButtonColor: '#FBC02D',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.editarUsuario(user);
+    } else if (result.isDenied) {
+      this.confirmarEliminacionUsuario(user);
+    }
+  });
+}
+
+// Editar usuario
+editarUsuario(user: User) {
+  Swal.fire({
+    title: 'Editar Usuario',
+    html: `
+      <input id="name" class="swal2-input" placeholder="Nombre" value="${user.name}">
+      <input id="email" class="swal2-input" placeholder="Email" value="${user.email}">
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    background: '#1e293b',
+    color: '#fff',
+    confirmButtonColor: '#4CAF50',
+    cancelButtonColor: '#FBC02D',
+    confirmButtonText: 'Actualizar',
+    cancelButtonText: 'Cancelar',
+    preConfirm: () => {
+      const name = (document.getElementById('name') as HTMLInputElement).value;
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      return { ...user, name, email };
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.actualizarUsuario(result.value);
+    }
+  });
+}
+
+actualizarUsuario(user: User) {
+  this.userService.updateUser(user).subscribe({
+    next: () => {
+      Swal.fire({
+        title: '¡Éxito!',
+        text: 'Usuario actualizado correctamente',
+        icon: 'success',
+        background: '#1e293b',
+        color: '#fff',
+        confirmButtonColor: '#4CAF50',
+        timer: 2000,
+      });
+      this.loadUsers();
+    },
+    error: () => {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se pudo actualizar el usuario',
+        icon: 'error',
+        background: '#1e293b',
+        color: '#fff',
+        confirmButtonColor: '#E53935',
+      });
+    }
+  });
+}
+
+// Confirmar eliminación de usuario
+confirmarEliminacionUsuario(user: User) {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: `Eliminarás al usuario: ${user.name}`,
+    icon: 'warning',
+    background: '#1e293b',
+    color: '#fff',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#E53935',
+    cancelButtonColor: '#FBC02D',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.eliminarUsuario(user.id!);
+    }
+  });
+}
+
+// Eliminar usuario
+eliminarUsuario(userId: number) {
+  this.userService.deleteUser(userId).subscribe({
+    next: () => {
+      Swal.fire({
+        title: '¡Ha sido Eliminado!',
+        text: 'El usuario ha sido eliminado correctamente',
+        icon: 'success',
+        background: '#1e293b',
+        color: '#fff',
+        confirmButtonColor: '#4CAF50',
+        timer: 2000,
+      });
+      this.loadUsers();
+    },
+    error: () => {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se pudo eliminar el usuario',
+        icon: 'error',
+        background: '#1e293b',
+        color: '#fff',
+        confirmButtonColor: '#E53935',
+      });
+    }
+  });
+}
+
+ 
 }
