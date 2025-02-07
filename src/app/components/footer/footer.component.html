@@ -15,11 +15,16 @@
           <li>
             <a href="#" 
                class="hover:text-teal-400 transition cursor-pointer"
-               (click)="mostrarOpcionesRecursos()">
+               (mouseenter)="mostrarOpcionesRecursos()">
               Mis recursos
             </a>
           </li>
-          <li><a href="#" class="hover:text-teal-400 transition">Mi cuenta</a></li>
+          <li>
+            <a href="#" class="hover:text-teal-400 transition cursor-pointer"
+               (mouseenter)="mostrarCuentaAdmin()">
+              Mi cuenta
+            </a>
+          </li>
           <li>
             <a href="#" 
                class="hover:text-teal-400 transition cursor-pointer"
@@ -38,7 +43,7 @@
     </div>
 
     <div class="border-t border-gray-700 mt-6 pt-4 text-sm text-gray-500 text-center">
-      © 2025 Segunda Mano UP. Todos los derechos reservados.
+      © 2025 . Todos los derechos reservados.
     </div>
   </div>
 </footer>

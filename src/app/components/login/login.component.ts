@@ -40,6 +40,7 @@ export class LoginComponent {
           showConfirmButton: false,
           timer: 1500
         }).then(() => {
+          console.log('Redirigiendo a /home después de login exitoso.');
           this.router.navigate(['/home']);
         });
       } else {
