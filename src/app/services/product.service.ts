@@ -7,7 +7,7 @@ import { Product } from '../models/product';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8080/products/products/'; // Corregir URL
+  private apiUrl = 'http://localhost:8080/api/v1/products'; // URL corregida
 
   constructor(private http: HttpClient) {}
 
@@ -20,11 +20,10 @@ export class ProductService {
   }
 
   updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}${product.id}`, product);
+    return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product); // Actualizar producto
   }
 
   deleteProduct(productId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}${productId}`);
+    return this.http.delete<void>(`${this.apiUrl}/${productId}`); // Eliminar producto
   }
-  
 }
